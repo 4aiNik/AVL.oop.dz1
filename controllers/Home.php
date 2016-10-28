@@ -7,10 +7,9 @@ class Home extends Base {
 	public function index() {
 		$this->LoadModel('Publications');
 		$model = new Publications();
-		$message = $model->readAll();
+		$message['messages'] = $model->readAll();
 
-		//require ('templates/editPublication.php');
-		$this->LoadPage('editPublication', $message);
+		echo $this->LoadPage('editPublication', $message);
 	}
 
 	public function checkNote() {

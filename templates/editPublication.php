@@ -11,7 +11,7 @@
     <a href="<?=ROOT?>control/addarticle">Добавить статью</a>
 
     <ul>
-        <?foreach($message as $mess):?>
+        <?foreach($messages as $mess):?>
         <li>
             <?if($mess['type'] == 'new'):?>
                 заголовок новости: <?=$mess['title']?><br>

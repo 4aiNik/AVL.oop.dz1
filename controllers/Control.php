@@ -4,7 +4,7 @@ class Control extends Base {
 	public function addnews() {
 		$this->LoadModel('News');
 		$model = new News();
-		$this->LoadPage('addNew');
+		echo $this->LoadPage('addNew');
 	}
 
 	public function savenew() {
@@ -21,7 +21,7 @@ class Control extends Base {
 	public function addannounce() {
 		$this->LoadModel('Announcement');
 		$model = new Announcement();
-		$this->LoadPage('addAnnouncement');
+		echo $this->LoadPage('addAnnouncement');
 	}
 
 	public function saveannounce() {
@@ -33,7 +33,7 @@ class Control extends Base {
 			if ($result) {
 				$this->redirectToAction("index","home");
 			} else {
-				$this->LoadPage('error');
+				echo $this->LoadPage('error');
 			}
 		}
 	}
@@ -48,13 +48,13 @@ class Control extends Base {
 		}
 
 		$result = $model->del($options);
-		$this->LoadPage('editPublication');
+		echo $this->LoadPage('editPublication');
 	}
 
 	public function addarticle() {
 		$this->LoadModel('Article');
 		$model = new Article();
-		$this->LoadPage('addArticle');
+		echo $this->LoadPage('addArticle');
 	}
 
 	public function savearticle() {
@@ -72,8 +72,8 @@ class Control extends Base {
 		if($_SERVER['REQUEST_METHOD'] == 'POST') {
 			$this->LoadModel('Publications');
 			$model = new Publications();
-			$message = $model->sortAll($_POST['filter'], $_POST['sort']);
-			require ('templates/editPublication.php');
+			$message['messages'] = $model->sortAll($_POST['filter'], $_POST['sort']);
+			echo $this->LoadPage('editPublication', $message);
 		}
 	}
 }
