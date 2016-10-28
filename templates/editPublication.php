@@ -10,46 +10,61 @@
     <a href="<?=ROOT?>control/addannounce">Добавить объявление</a>
     <a href="<?=ROOT?>control/addarticle">Добавить статью</a>
 
-    <ul>
+    <table border="1">
+        <tr>
+            <th>тип текста</th>
+            <th>заголовок</th>
+            <th>текст</th>
+            <th>инфо</th>
+        </tr>
         <?foreach($messages as $mess):?>
-        <li>
+        <tr>
             <?if($mess['type'] == 'new'):?>
-                заголовок новости: <?=$mess['title']?><br>
-                текст: <?=$mess['text']?><br>
-                дата: <?=$mess['nowDate']?><br>
-                источник: <?=$mess['source']?>
+                <td>новость</td>
+                <td><?=$mess['title']?></td>
+                <td><?=$mess['text']?></td>
+                <td>
+                    дата: <?=$mess['nowDate']?><br>
+                    источник: <?=$mess['source']?>                
+                </td>
             <?endif?>
 
             <?if($mess['type'] == 'announcement'):?>
-                заголовок объявления: <?=$mess['title']?><br>
-                текст: <?=$mess['text']?><br>
-                дата публикации: <?=$mess['nowDate']?><br>
-                дата актуальности: <?=$mess['actuality']?><br>
-                <?if (date("Y-m-d") > $mess['actuality']):?><br>
-                    <form action="<?=ROOT.'control/delannounce/'.$mess["id"]?>" method="post">
-                        <button type="submit">удалить</button>
-                    </form>
-                <?endif?>
+                <td>объявление</td>
+                <td><?=$mess['title']?></td>
+                <td><?=$mess['text']?></td>
+                <td>
+                    дата публикации: <?=$mess['nowDate']?><br>
+                    дата актуальности: <?=$mess['actuality']?><br>
+                    <?if (date("Y-m-d") > $mess['actuality']):?>
+                        <form action="<?=ROOT.'control/delannounce/'.$mess["id"]?>" method="post">
+                            <button type="submit">удалить</button>
+                        </form>
+                    <?endif?>      
+                </td>            
             <?endif?>
 
             <?if($mess['type'] == 'article'):?>
-                заголовок статьи: <?=$mess['title']?><br>
-                текст: <?=$mess['text']?><br>
-                авторы: <?=$mess['autors']?><br>
-                текущая оценка: <?=$mess['rating']?><br>
-                <form action="<?=ROOT.'home/checkNote/'?>" method="post">
-                    <input type='hidden' name='article' value="<?=$mess['id']?>"><p>
-                    <input type='radio' name='rating' value='1'>1
-                    <input type='radio' name='rating' value='2'>2
-                    <input type='radio' name='rating' value='3'>3
-                    <input type='radio' name='rating' value='4'>4
-                    <input type='radio' name='rating' value='5'>5</p>
-                    <button type='submit'>оценить статью</button>
-                </form>
+                <td>статья</td>
+                <td><?=$mess['title']?></td>
+                <td><?=$mess['text']?></td>
+                <td>
+                    авторы: <?=$mess['autors']?><br>
+                    текущая оценка: <?=$mess['rating']?><br>
+                    <form action="<?=ROOT.'home/checkNote/'?>" method="post">
+                        <input type='hidden' name='article' value="<?=$mess['id']?>"><p>
+                        <input type='radio' name='rating' value='1'>1
+                        <input type='radio' name='rating' value='2'>2
+                        <input type='radio' name='rating' value='3'>3
+                        <input type='radio' name='rating' value='4'>4
+                        <input type='radio' name='rating' value='5'>5</p>
+                        <button type='submit'>оценить статью</button>
+                    </form>
+                </td>
             <?endif?>
-        </li>
+        </tr>
         <?endforeach?>
-    </ul>
+    </table>
 
     <form action="<?=ROOT.'control/sort/'?>" method="post">
     	<p>Фильтровать по: 

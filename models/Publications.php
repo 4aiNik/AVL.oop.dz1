@@ -8,8 +8,18 @@ class Publications {
 		$config = $this->config;
 		static $connection;
 		if (empty($connection)) {
-			$connection = mysqli_connect(HOST, USER, PASS, DBNAME);
-			mysqli_set_charset($connection, ENCODING);
+			try {
+				$connection = mysqli_connect(HOST, USER, PASS, DBNAME);
+				mysqli_set_charset($connection, ENCODING);
+				if (!$connection) {
+					throw new Exception('нет соединения с бд');
+				}
+			} catch (Exception $noBD) {
+				echo $noBD->getMessage();
+				$file = 'log.txt';
+				$string = date("Y-m-d G:i:s").' '.$noBD->getMessage()."\r\n";
+				file_put_contents($file, $string, FILE_APPEND);
+			}
 		}
 		return $connection;
 	}

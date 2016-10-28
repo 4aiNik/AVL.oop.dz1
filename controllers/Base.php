@@ -10,8 +10,6 @@ class Base {
 			ob_start();
 			extract($data);
 			require $filename;
-//			echo "<pre>";
-//			print_r($data);
 			$content = ob_get_contents();
 			ob_end_clean();
 		}

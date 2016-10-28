@@ -2,7 +2,7 @@
 class Announcement extends Publications {
 	public $date = '';
 	public $actuality = '';
-
+//для проверки кнопки удаления закомментировать 9, 16-18стр
 	public function add($title, $text, $actuality) {
 		$db = $this->connection();
 		$newDate = date("Y-m-d");
