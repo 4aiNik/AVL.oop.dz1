@@ -7,8 +7,13 @@ class Base {
 		$filename = 'templates/' . $name . '.php';
 		$content = '';
 		if (file_exists($filename)) {
+			ob_start();
 			extract($data);
 			require $filename;
+//			echo "<pre>";
+//			print_r($data);
+			$content = ob_get_contents();
+			ob_end_clean();
 		}
 		return $content;
 	}
@@ -19,6 +24,7 @@ class Base {
 	}
 	
 	protected function redirectToAction($method = 'index',$action = 'home') {
-		header("Location:index.php?action={$action}&method={$method}");
+		header("Location:".ROOT."$action/$method");
+		exit(); 
 	}
 }

@@ -41,8 +41,14 @@ class Control extends Base {
 	public function delannounce() {
 		$this->LoadModel('Announcement');
 		$model = new Announcement();
-		$result = $model->del($_GET['id']);
-		$this->redirectToAction("index","home");
+
+		$routes = preg_split('/[\/]+/', $_SERVER['REQUEST_URI'], -1, PREG_SPLIT_NO_EMPTY);
+		if ( !empty($routes[4]) ) {
+			$options = $routes[4];
+		}
+
+		$result = $model->del($options);
+		$this->LoadPage('editPublication');
 	}
 
 	public function addarticle() {
@@ -62,20 +68,11 @@ class Control extends Base {
 		}
 	}
 
-	public function filter() {
-		if($_SERVER['REQUEST_METHOD'] == 'POST') {
-			$this->LoadModel('Publications');
-			$model = new Publications();
-			$message = $model->filterAll($_POST['filter']);
-			require ('templates/editPublication.php');
-		}
-	}
-
 	public function sort() {
 		if($_SERVER['REQUEST_METHOD'] == 'POST') {
 			$this->LoadModel('Publications');
 			$model = new Publications();
-			$message = $model->sortAll($_POST['sort']);
+			$message = $model->sortAll($_POST['filter'], $_POST['sort']);
 			require ('templates/editPublication.php');
 		}
 	}

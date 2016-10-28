@@ -7,9 +7,10 @@ class Home extends Base {
 	public function index() {
 		$this->LoadModel('Publications');
 		$model = new Publications();
-		$message = $model->readAll();
+		$message['messages'] = $model->readAll();
 
-		require ('templates/editPublication.php');
+		//require ('templates/editPublication.php');
+		$this->LoadPage('editPublication', $message);
 	}
 
 	public function checkNote() {
@@ -22,6 +23,6 @@ class Home extends Base {
 			$model = new Article();
 			$newNote = $model->checkNote($_POST['article'], $_POST['rating']);
 		}
-		header('Location: index.php');
+		$this->redirectToAction("index","home");
 	}
 }

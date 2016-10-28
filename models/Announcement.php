@@ -6,7 +6,6 @@ class Announcement extends Publications {
 	public function add($title, $text, $actuality) {
 		$db = $this->connection();
 		$newDate = date("Y-m-d");
-		//ДЛЯ ПРОВЕРКИ УДАЛЕНИЯ ЗАКОММЕНТИРОВАТЬ 10, 16-18стр
 		if ($newDate < $actuality) {
 			$db->query("INSERT INTO `publication` (`title`, `text`, `type`, `nowDate`) VALUES ('$title', '$text', 'announcement', '$newDate')");
 			$textId = $db->query("SELECT `id` FROM `publication` WHERE `title` = '$title' AND `text` = '$text'");

@@ -5,7 +5,7 @@
     <title>portal</title>
 </head>
 <body>
-    <form action="index.php?action=control&method=savenew" method="post">
+        <form action="<?=ROOT?>control/savenew" method="post">
     	<p>Заголовок: <input type="text" name="title"></p>
     	<p>Текст: <input type="text" name="text"></p>
     	<p>Источник: <input type="text" name="source"></p>

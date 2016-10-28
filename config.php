@@ -1,9 +1,7 @@
 <?php
-
-return [
-    'host' => 'localhost',
-    'dbname' => 'publicOOP',
-    'user' => 'root',
-    'password' => '',
-    'encoding' => 'utf8'
-];
+define('ROOT', 'http://localhost/dzOOP/index.php/');
+define('HOST', 'localhost');
+define('DBNAME', 'publicOOP');
+define('USER', 'root');
+define('PASS', '');
+define('ENCODING', 'utf8');
